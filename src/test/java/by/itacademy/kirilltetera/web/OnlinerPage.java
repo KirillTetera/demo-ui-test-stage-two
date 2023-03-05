@@ -7,9 +7,7 @@ public class OnlinerPage {
             "//div[@class='auth-form__title auth-form__title_big auth-form__title_condensed-default']";
     public static final String buttonEnter =
             "//button[@class='auth-button auth-button_primary auth-button_middle auth-form__button auth-form__button_width_full']";
-    public static final String warningMessageEmptyNickOrEmail =
-            "/html/body/div[6]/div/div/div/div/div/div/div/div[2]/div/form/div[1]/div/div[2]/div/div/div[2]/div";
-    public static final String warningMessageEmptyPassword =
-            "/html/body/div[6]/div/div/div/div/div/div/div/div[2]/div/form/div[2]/div/div/div[2]/div";
+    public static final String warningMessagesEmptyCredentials =
+            "//div[@class='auth-form__description auth-form__description_error auth-form__description_base auth-form__description_extended-other']";
     public static final String inputNickOrEmail = "//input[@placeholder='Ник или e-mail']";
 }

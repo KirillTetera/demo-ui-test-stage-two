@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class OnlinerTest {
     WebDriver driver;
@@ -39,12 +40,12 @@ public class OnlinerTest {
         buttonEntrance.click();
         WebElement buttonEnter = driver.findElement(By.xpath(OnlinerPage.buttonEnter));
         buttonEnter.click();
-        WebElement warningMessageEmptyNickOrEmail = driver.findElement
-                (By.xpath(OnlinerPage.warningMessageEmptyNickOrEmail));
-        Assert.assertEquals("Укажите ник или e-mail", warningMessageEmptyNickOrEmail.getText());
-        WebElement warningMessageEmptyPassword = driver.findElement
-                (By.xpath(OnlinerPage.warningMessageEmptyPassword));
-        Assert.assertEquals("Укажите пароль", warningMessageEmptyPassword.getText());
+        List<WebElement> warningMessagesEmptyCredentials = driver.findElements(
+                By.xpath(OnlinerPage.warningMessagesEmptyCredentials));
+        Assert.assertEquals("Укажите ник или e-mail", warningMessagesEmptyCredentials.get(0)
+                .getText());
+        Assert.assertEquals("Укажите пароль", warningMessagesEmptyCredentials.get(1)
+                .getText());
     }
     @Test
     public void testOnlinerLoginFormWithEmptyPassword() {
@@ -57,10 +58,9 @@ public class OnlinerTest {
         WebElement buttonEnter = driver.findElement
                 (By.xpath(OnlinerPage.buttonEnter));
         buttonEnter.click();
-        WebElement warningMessageEmptyPassword = new WebDriverWait(driver, Duration.ofSeconds(1))
-                .until(ExpectedConditions
-                        .visibilityOfElementLocated(By.xpath(OnlinerPage.warningMessageEmptyPassword)));
-        Assert.assertEquals("Укажите пароль", warningMessageEmptyPassword.getText());
+        WebElement warningMessagesEmptyCredentials = driver.
+                findElement(By.xpath(OnlinerPage.warningMessagesEmptyCredentials));
+        Assert.assertEquals("Укажите пароль", warningMessagesEmptyCredentials.getText());
     }
     @After
     public void tearDown() {
