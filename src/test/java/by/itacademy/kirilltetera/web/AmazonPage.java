@@ -10,5 +10,4 @@ public class AmazonPage {
     public static final String continueButton = "//input[@aria-labelledby='continue-announce']";
     public static final String warningEmptyCredentials =
             "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div[1]/form/div/div/div/div[1]/div/div/div";
-
 }

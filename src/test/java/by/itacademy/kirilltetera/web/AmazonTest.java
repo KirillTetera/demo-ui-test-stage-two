@@ -1,5 +1,5 @@
 package by.itacademy.kirilltetera.web;
-
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -15,7 +16,9 @@ public class AmazonTest {
     WebDriver driver;
    @Before
    public void warmUp() {
-       driver = new ChromeDriver();
+       ChromeOptions chromeOptions = new ChromeOptions();
+       chromeOptions.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
+       driver = new ChromeDriver(chromeOptions);
        driver.manage().window().maximize();
        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
        driver.navigate().to(AmazonPage.url);
@@ -53,7 +56,8 @@ public class AmazonTest {
         Assert.assertEquals("Enter your email or mobile phone number", warningEmptyCredentials.getText());
     }
 
-    public void tearDown (){
-        driver.quit();
+    @After
+    public void tearDown(){
+       driver.quit();
     }
 }
