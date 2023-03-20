@@ -7,20 +7,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.List;
 
 public class OnlinerTest {
     WebDriver driver;
-
     @Before
     public void preporation() {
-        driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
+        driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.navigate().to(OnlinerPage.url);
     }
-
     @Test
     public void testOnlinerCopyright() {
         OnlinerStep onlinerStep = new OnlinerStep(driver);
@@ -28,7 +29,6 @@ public class OnlinerTest {
         Assert.assertEquals("© 2001—2023 Onlíner",
                 driver.findElement(By.xpath(OnlinerPage.copyright)).getText());
     }
-
     @Test
     public void testOpenOnlinerLoginForm() {
         OnlinerStep onlinerStep = new OnlinerStep(driver);
@@ -36,7 +36,6 @@ public class OnlinerTest {
         Assert.assertEquals("Вход",
                 driver.findElement(By.xpath(OnlinerPage.textEntrance)).getText());
     }
-
     @Test
     public void testOnlinerLoginFormWithEmptyCredentials() {
         OnlinerStep onlinerStep = new OnlinerStep(driver);
@@ -48,7 +47,6 @@ public class OnlinerTest {
         Assert.assertEquals("Укажите пароль", warningMessagesEmptyCredentials.get(1)
                 .getText());
     }
-
     @Test
     public void testOnlinerLoginFormWithEmptyPassword() {
         OnlinerStep onlinerStep = new OnlinerStep(driver);
@@ -56,10 +54,8 @@ public class OnlinerTest {
         Assert.assertEquals("Укажите пароль",
                 driver.findElement(By.xpath(OnlinerPage.warningMessagesEmptyCredentials)).getText());
     }
-
     @After
-    public void tearDown() {
+    public void tearDo() {
         driver.quit();
     }
 }
-
