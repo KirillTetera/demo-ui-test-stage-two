@@ -9,9 +9,12 @@ public class OnlinerStep {
     OnlinerStep (WebDriver driver) {
         this.driver=driver;
     }
+
     public void testOnlinerCopyright() {
         WebElement copyright = driver.findElement(By.xpath(OnlinerPage.copyright));
+
     }
+
     public void testOpenOnlinerLoginForm() {
         WebElement buttonEntrance = driver.findElement(By.xpath(OnlinerPage.buttonEntrance));
         buttonEntrance.click();

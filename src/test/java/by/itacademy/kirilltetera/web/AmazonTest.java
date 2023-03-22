@@ -5,14 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.time.Duration;
 
 public class AmazonTest {
-
     WebDriver driver;
    @Before
    public void warmUp() {
@@ -25,37 +22,32 @@ public class AmazonTest {
    }
     @Test
     public void testAmazonCopyright() {
-        WebElement copyrightElement = driver.findElement(By.xpath(AmazonPage.copyright));
-        Assert.assertEquals("© 1996-2023, Amazon.com, Inc. or its affiliates", copyrightElement.getText());
+       //AmazonStep amazonStep = new AmazonStep(driver);
+       //amazonStep.testAmazonCopyright();
+        Assert.assertEquals("© 1996-2023, Amazon.com, Inc. or its affiliates",
+                driver.findElement(By.xpath(AmazonPage.copyright)).getText());
     }
     @Test
     public void testOpenAmazonCart() {
-        WebElement cartButton = driver.findElement(By.xpath(AmazonPage.cartButton));
-        cartButton.click();
-        WebElement cartIsEmptyWarning = driver.findElement(By.xpath(AmazonPage.cartIsEmptyWarning));
-        Assert.assertEquals("Your Amazon Cart is empty", cartIsEmptyWarning.getText());
+        AmazonStep amazonStep = new AmazonStep(driver);
+        amazonStep.testOpenAmazonCart();
+        Assert.assertEquals("Your Amazon Cart is empty",
+                driver.findElement(By.xpath(AmazonPage.cartIsEmptyWarning)).getText());
     }
     @Test
     public void testOpenAmazonLoginForm() {
-        WebElement cartButton = driver.findElement(By.xpath(AmazonPage.cartButton));
-        cartButton.click();
-        WebElement signInButton = driver.findElement(By.xpath(AmazonPage.signInButton));
-        signInButton.click();
-        WebElement signInText = driver.findElement(By.xpath(AmazonPage.signInText));
-        Assert.assertEquals("Sign in", signInText.getText());
+        AmazonStep amazonStep = new AmazonStep(driver);
+        amazonStep.testOpenAmazonLoginForm();
+        Assert.assertEquals("Sign in",
+                driver.findElement(By.xpath(AmazonPage.signInText)).getText());
     }
     @Test
     public void testAmazonLoginFormWithEmptyCredentials() {
-        WebElement cartButton = driver.findElement(By.xpath(AmazonPage.cartButton));
-        cartButton.click();
-        WebElement signInButton = driver.findElement(By.xpath(AmazonPage.signInButton));
-        signInButton.click();
-        WebElement continueButton = driver.findElement(By.xpath(AmazonPage.continueButton));
-        continueButton.click();
-        WebElement warningEmptyCredentials = driver.findElement(By.xpath(AmazonPage.warningEmptyCredentials));
-        Assert.assertEquals("Enter your email or mobile phone number", warningEmptyCredentials.getText());
+        AmazonStep amazonStep = new AmazonStep(driver);
+        amazonStep.testAmazonLoginFormWithEmptyCredentials();
+        Assert.assertEquals("Enter your email or mobile phone number",
+                driver.findElement(By.xpath(AmazonPage.warningEmptyCredentials)).getText());
     }
-
     @After
     public void tearDown(){
        driver.quit();
